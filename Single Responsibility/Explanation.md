@@ -1,14 +1,48 @@
-# Single Responsibility Principle
-`Explanation`: It States tht a class should have only one reason to change, This means that a class Should have only one responsibility.
---------
-## In The Violation area:
-
-The `Employee class` has two responsibilities:
-Holding employee data `(name, salary)`.
-Handling persistence `(saveToDatabase() method)`.
-This violates SRP because if we change how employees are stored (e.g., switching from a database to a file system), we need to `modify` the Employee class.
+`Explanation` :It states that a class should have only one reason to change, this means that a class should have only one responsibility.
 ----
-## In the Fix Area:
+### Single Responsibility Principle (SRP) Violation and Fix
 
-__Now, the `Employee class` is only responsible for storing employee data.
-The `EmployeeRepository class` is responsible for persistence, handling database operations separately.__
+#### SRP Violation
+The original code violates SRP because the `Employee` class has **two responsibilities**: 
+1. Managing employee data (`name`, `salary`).
+2. Handling database persistence (`saveToDatabase()`).
+```java
+class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+
+    public void saveToDatabase() {
+        System.out.println("Saving employee to database...");
+    }
+}
+```
+`Issue:` If `database` logic changes, the `Employee class` must be modified, violating SRP.
+Breaks SRP: A class should have only one reason to change.
+---
+## The Fix: 
+```java
+class Employee {
+    private String name;
+    private double salary;
+
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+}
+
+class EmployeeRepository {
+    public void saveToDatabase(Employee employee) {
+        System.out.println("Saving employee to database...");
+    }
+}
+```
+Now, `Employee` only handles employee data.
+`EmployeeRepository` is responsible for persistence.
+SRP is maintained: Each class has a single responsibility.
+
