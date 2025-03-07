@@ -1,3 +1,5 @@
+`Explanation`: The OCP States that Software entities should be open for extension but closed for modification.
+-----
 ### Open/Closed Principle (OCP) Violation and Fix
 
 #### OCP Violation
